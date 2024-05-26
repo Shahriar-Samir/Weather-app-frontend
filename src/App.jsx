@@ -57,6 +57,12 @@ const App = () => {
 
 
    useEffect(()=>{ 
+      axios.get('https://weather-watch-backend.vercel.app/')
+      .then(res=>{
+        console.log(res.data)
+      })
+
+
       let temIndex = NaN
       axios.get('http://localhost:5000/location')
       .then(res=>{
@@ -103,12 +109,12 @@ const App = () => {
 
    }
 
-  //  console.log
 
   return (
     <div className=''>
         <div className='mt-3 mb-10 flex gap-3 items-center overflow-auto'>
-            {lastHistory?.temperature_2m.map((temp,ind)=>{
+            {
+            lastHistory?.temperature_2m.slice(0,24).map((temp,ind)=>{
                 const time = lastHistory.time[ind]
                 if(time === presentTime){
                   return <div className='bg-gray-500 p-2 rounded-lg flex flex-col items-center'>
